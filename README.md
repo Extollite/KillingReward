@@ -5,7 +5,7 @@ Actually this name is not really correct because it is adding money reward for k
 but also adding /back, /wild and /suicide command.<br>
 This mod should be treated as some Custom EZ mod example.
 
-##Config
+Config
 -------------
 ```
   KllingReward:
