@@ -15,9 +15,9 @@ add_compile_options (/EHsc /utf-8)
 add_definitions (-DWIN32_LEAN_AND_MEAN=1)
 
 # Override it in CMakeSettings.json or command line option
-set (MOD_SDK_PATH E:/eZTest)
+set (MOD_SDK_PATH D:/eZTest)
 
-include_directories (${MOD_SDK_PATH}/Include/MinecraftHeaders ${MOD_SDK_PATH}/Include/Public)
+include_directories (${MOD_SDK_PATH}/Include ${MOD_SDK_PATH}/Include)
 link_directories (${MOD_SDK_PATH}/Lib)
 
 find_package (SQLiteCpp CONFIG REQUIRED)
