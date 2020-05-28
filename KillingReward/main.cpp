@@ -39,10 +39,10 @@ private:
 
 
 THook(void*, "?die@Mob@@UEAAXAEBVActorDamageSource@@@Z", Mob& mob, ActorDamageSource* src) {
-  if ((int)mob.getEntityTypeId() == 1) return original(mob, src);
+  if (mob.getEntityTypeId() == ActorType::Player) return original(mob, src);
   if (src->isChildEntitySource() || src->isEntitySource()) {
     Actor *ac = LocateService<Level>()->fetchEntity(src->getEntityUniqueID(), false);
-    if (ac && (int) ac->getEntityTypeId() == 1) {
+    if (ac && ac->getEntityTypeId() == ActorType::Player) {
       auto &db   = Mod::PlayerDatabase::GetInstance();
       auto entry = db.Find((Player *) ac);
       if (!entry) return original(mob, src);
