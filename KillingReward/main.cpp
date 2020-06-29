@@ -15,7 +15,6 @@ void PreInit() {
 void PostInit() {}
 
 class ActorDamageSource {
-private:
   char filler[0x10];
 
 public:
@@ -28,6 +27,8 @@ private:
   __declspec(dllimport) virtual void *unk1() = 0;
   __declspec(dllimport) virtual void *unk2() = 0;
   __declspec(dllimport) virtual void *unk3() = 0;
+  __declspec(dllimport) virtual void *unk4() = 0;
+
 public:
   __declspec(dllimport) virtual ActorUniqueID getEntityUniqueID() const = 0;
   __declspec(dllimport) virtual int getEntityType() const               = 0;
@@ -36,9 +37,7 @@ private:
   __declspec(dllimport) virtual int getEntityCategories() const = 0;
 };
 
-
-
-THook(void*, "?die@Mob@@UEAAXAEBVActorDamageSource@@@Z", Mob& mob, ActorDamageSource* src) {
+THook(void *, "?die@Mob@@UEAAXAEBVActorDamageSource@@@Z", Mob &mob, ActorDamageSource *src) {
   if (mob.getEntityTypeId() == ActorType::Player) return original(mob, src);
   if (src->isChildEntitySource() || src->isEntitySource()) {
     Actor *ac = LocateService<Level>()->fetchEntity(src->getEntityUniqueID(), false);
