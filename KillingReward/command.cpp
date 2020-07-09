@@ -91,6 +91,6 @@ public:
 
 void initCommand(CommandRegistry *registry) {
   //WildCommand::setup(registry);
-  SuicideCommand::setup(registry);
-  BackCommand::setup(registry);
+  if(settings.suicideCommand) SuicideCommand::setup(registry);
+  if (settings.backCommand) BackCommand::setup(registry);
 }

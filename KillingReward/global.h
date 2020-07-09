@@ -23,9 +23,15 @@
 
 struct Settings {
   std::map<std::string, long long> money;
+  bool looseMoneyOnDeath;
+  bool suicideCommand  = true;
+  bool backCommand     = true;
+  float percentOfMoney = 0.05;
 
   template <typename IO> static inline bool io(IO f, Settings &settings, YAML::Node &node) {
-    return f(settings.money, node["killingMoney"]);
+    return f(settings.money, node["killingMoney"]) && f(settings.looseMoneyOnDeath, node["looseMoneyOnDeath"]) &&
+           f(settings.percentOfMoney, node["percentOfMoney"]) && f(settings.suicideCommand, node["suicideCommand"]) &&
+           f(settings.backCommand, node["backCommand"]);
   }
 };
 

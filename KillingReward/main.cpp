@@ -65,5 +65,13 @@ THook(void *, "?die@Player@@UEAAXAEBVActorDamageSource@@@Z", Player &thi, void *
   auto pk = TextPacket::createTextPacket<TextPacketType::SystemMessage>("You have 30 seconds to use /back!");
   thi.sendNetworkPacket(pk);
   deaths[it->xuid] = deathData;
+  if (settings.looseMoneyOnDeath) {
+    int64_t balance = Mod::Economy::GetBalance(it->player);
+    long long loose   = -(balance * settings.percentOfMoney);
+    if (balance - loose < 0) { 
+        loose = -balance;
+    }
+    Mod::Economy::UpdateBalance(it->player, loose, "death");
+  }
   return original(thi, src);
 }
